@@ -1,0 +1,28 @@
+<xsd:schema targetNamespace="http://www.aulaws.com.br/api/soap/domain"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.aulaws.com.br/api/soap/domain"
+    elementFormDefault="qualified">
+	
+	<xsd:element name="FeriasRequisicao">
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element name="funcionario"
+					type="tns:funcionario_type" />
+				<xsd:element name="ferias" type="tns:ferias_type" />
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="funcionario_type">
+		<xsd:sequence>
+			<xsd:element name="identificador" type="xsd:integer" />
+			<xsd:element name="nome" type="xsd:string" />
+			<xsd:element name="sobrenome" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ferias_type">
+		<xsd:sequence>
+			<xsd:element name="dataInicio" type="xsd:date" />
+			<xsd:element name="dataTermino" type="xsd:date" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

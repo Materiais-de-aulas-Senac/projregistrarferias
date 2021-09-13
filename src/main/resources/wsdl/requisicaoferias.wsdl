@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:ferias="http://www.aulaws.com.br/api/soap/domain"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://www.aulaws.com.br/api/soap/endpoint"
+                  xmlns:tns="http://www.aulaws.com.br/api/soap/endpoint">
+
+    <wsdl:types>
+        <xsd:schema>
+            <xsd:import namespace="http://www.aulaws.com.br/api/soap/domain" schemaLocation="../definitions/funcionario.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="FeriasRequisicao">
+        <wsdl:part name="feriasRequisicao" element="ferias:FeriasRequisicao"/>        
+    </wsdl:message>
+
+    <wsdl:message name="FeriasResposta">
+        <wsdl:part name="feriasResposta" type="xsd:string" />
+    </wsdl:message>
+
+    <wsdl:portType name="FeriasRequisicaoService">
+        <wsdl:operation name="registrarFerias">
+            <wsdl:input name="funcionario" message="tns:FeriasRequisicao"/>
+            <wsdl:output name="returnConfirmacao" message="tns:FeriasResposta" />
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:binding name="FeriasRequisicaoServiceBinding" 
+        type="tns:FeriasRequisicaoService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <wsdl:operation name="registrarFerias" >
+                <soap:operation soapAction="http://www.aulaws.com/services/registrarferias"/>
+                <wsdl:input>
+                    <soap:body use="literal"/>
+                </wsdl:input>
+                
+                <wsdl:output>
+                    <soap:body use="literal"/>
+                 </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="FeriasService">
+
+        <wsdl:port binding="tns:FeriasRequisicaoServiceBinding" name="FeriasServicePorta">
+            <soap:address location="http://localhost:8080/services/registrarferias"/>
+        </wsdl:port>
+        
+    </wsdl:service>
+
+</wsdl:definitions>
